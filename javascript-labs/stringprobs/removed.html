@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Remove Duplicate Characters</title>
+<script type="text/javascript">
+
+function showUniqueCharacters( myString ) 
+{
+  var uniqueChars = "";
+  for (var charIDX = 0; charIDX < myString.length; charIDX++) 
+  {
+    // Get the character we wish to examine
+	var aChar = myString.charAt( charIDX ) ;
+	// Determine if this character was already found.
+	if ( uniqueChars.indexOf( aChar ) == -1 ) {
+			uniqueChars += aChar ;
+	}
+  }
+  return uniqueChars;
+};
+var stringForUnique = prompt("Enter a string here") ;
+alert( "String with dups removed is :\n" + showUniqueCharacters( stringForUnique ) ) ;
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

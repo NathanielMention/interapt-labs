@@ -1,0 +1,57 @@
+<html>
+<title>Event Handlers</title>
+
+<body>
+
+<script>
+function entering( element ) {
+	alert('Entering field with ID = ' + element.id + " and value " + element.value ) ;
+}
+
+function exiting( element ) {
+	alert("Exiting field with ID = " + element.id + " and value " + element.value ) ;
+}
+
+function hover( elem ) {
+	alert('Hovering over ' + elem.id + " # rows = " + elem.rows) ;
+}
+
+function whatIsSelected( elem ) {
+	alert("Item selected is " + elem.value + " element type = " + elem.type) ;
+}
+
+function changeButton( btn ) {
+	btn.innerHTML = "I am Changed!!!" ;
+}
+
+</script>
+<h1>Event handlers for different input widgets</h1>
+<h3>Attach event handlers to these widgets per instructions</h3>
+<table border='2'>
+	<tr><td>Widget type</td><td>Example</td></tr>
+	<tr><td>Text Input</td><td><input id='text1' type='text' onfocus='entering( this );' onblur='exiting( this );'></td></tr>
+	<tr><td>Text Area</td><td><textarea id='tarea' rows='2' cols='10' onmouseover='hover( this );'></textarea></td></tr>
+	<tr><td>Single Select</td><td><select onchange='whatIsSelected( this );'>
+									<option>Choice1</option>
+									<option>Choice2</option>
+									<option>Choice3</option>
+								  </select></td></tr>	
+	<tr><td>CheckBox</td><td><input type='checkbox' name='example' onchange='whatIsSelected( this );' value='Check 1'>Check 1
+	                         <input type='checkbox' name='example' onchange='whatIsSelected( this );' value='Check 2'>Check 2</td></tr>	
+	<tr><td>Radio</td><td><input type='radio' name='example' onchange='whatIsSelected( this );' value='Radio 1'>Radio 1
+	                      <input type='radio' name='example' onchange='whatIsSelected( this );' value='Radio 1'>Radio 2</td></tr>
+	<tr><td>Button</td><td><button type='button' onmousedown='changeButton( this );'>This is a button</button></td></tr>	
+</table>
+<h1>These are HTML5 features in some widgets</h1>
+<h3>This is for your edification; don't attach event handlers to these!</h3>
+<table border='2'>
+	<tr><td>Widget type</td><td>Example</td></tr>
+	<tr><td>Input numbers within range</td><td><input type='number' min='1' max='10' name='numtype'></td></tr>
+	<tr><td>Input numbers with a slider</td><td><input type='range' min='1' max='10' name='rangetype'></td></tr>
+	<tr><td>Date picker</td><td><input type='date' name='datetype'></td></tr>
+	<tr><td>Color picker</td><td><input type='color' name='colortype'></td></tr>
+	<tr><td>File picker</td><td><input type='file' name='filetype'></td></tr>	
+</table>
+
+</body>
+</html>

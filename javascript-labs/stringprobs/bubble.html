@@ -1,0 +1,30 @@
+<html>
+<body>
+    <script>
+        function bubbleSort(stringForSort) {
+            // Split the input string into an array of characters for sorting.
+            var arr = stringForSort.split('');
+            // Get the length of the array.
+            var len = arr.length;
+            // Outer loop for the number of passes.
+            for (var i = 0; i < len - 1; i++) {
+                // Inner loop for pairwise comparisons and swaps.
+                for (var j = 0; j < len - i - 1; j++) {
+                    // Compare adjacent characters and swap them if necessary.
+                    if (arr[j] > arr[j + 1]) {
+                        var temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            // Join the sorted characters back into a string.
+            var sortedString = arr.join('');
+            return sortedString;
+        }
+
+        var sortMe = prompt("Enter string to sort");
+        alert("sorted = " + bubbleSort(sortMe));
+    </script>
+</body>
+</html>

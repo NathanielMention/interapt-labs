@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Temperature Converter</title>
+  <script>
+    var degreeSymbol = '\xB0'; // That's the little degree circle - can you include this in your output?
+    var lineBreak = '\n';
+  
+    // Celsius to Fahrenheit
+    var cTemp = prompt("Enter a Celsius temp to convert to Fahrenheit");
+  
+    // Compute Fahrenheit equivalent HERE.
+    // Fahrenheit temp is 32 more than 9/5ths of the Celsius temp
+    var fTemp = (cTemp * 9/5) + 32;
+  
+    // Create a message (just a variable) saying "100C is 212F" or whatever value you used for cTemp
+    var cToFMessage = cTemp + degreeSymbol + "C is " + fTemp + degreeSymbol + "F";
+  
+    // If temperature exceeds or equals 212 F we append "It's boiling here" ;
+    if (fTemp >= 212) {
+      cToFMessage += " It's boiling here";
+    }
+  
+    // If temperature is less than or equals 32 F we append "It's freezing here"
+    if (fTemp <= 32) {
+      cToFMessage += " It's freezing here";
+    }
+  
+    // The other way
+    var fTemp = prompt("Enter a Fahrenheit temp to convert to Celsius");
+  
+    // Compute Celsius equivalent HERE
+    // Celsius temp is 5/9ths of the difference of the Fahrenheit temp and 32
+    var cTemp = (fTemp - 32) * 5/9;
+  
+    // Create a message (just a variable) saying "100F is 212C" or whatever value you used for cTemp
+    var fToCMessage = fTemp + degreeSymbol + "F is " + cTemp + degreeSymbol + "C";
+  
+    // If temperature exceeds or equals 100 C we append "It's boiling here" ;
+    if (cTemp >= 100) {
+      fToCMessage += " It's boiling here";
+    }
+  
+    // If temperature is less than or equals 0 C we append "It's freezing here"
+    if (cTemp <= 0) {
+      fToCMessage += " It's freezing here";
+    }
+  
+    // Create an alert showing both messages - put a line break
+    alert(cToFMessage + lineBreak + fToCMessage);
+  
+    // Write the same output as you used for the alert box to the console
+    console.log(cToFMessage);
+    console.log(fToCMessage);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Doing JSON Stuff</title>
+
+<script language="javascript">
+
+var jsonString = {
+     "bookstore":{
+         "book":[
+                 {"_attributes":{"category":"cooking"},
+                   "title":"Everyday Italian",
+                   "author":"Giada De Laurentiis",
+                   "year":"2005",
+                   "price":"30.00"},
+                  {"_attributes":{"category":"children"},
+                   "title":"Harry Potter",
+                   "author":"J K. Rowling",
+                   "year":"2005",
+                   "price":"29.99"}
+                  ]
+            }
+}
+
+// Retrieve all the book titles from the JSON string
+function getBookTitles( jsonString ) {
+    // Create a row for the table
+    var bookTitles = "";
+    var delim = "";
+    // Get all the book tags
+    var books = jsonString.bookstore.book;
+    for (bIDX = 0; bIDX < books.length; bIDX++) {
+        // Don't want a comma prepended to the first book, eh?
+        delim = (bIDX > 0) ? ', ' : '';
+        bookTitles = bookTitles + delim + jsonString.bookstore.book[ bIDX ].title;
+    }
+    // Update page DIV with found titles.
+    document.getElementById("bookTitles").innerHTML = bookTitles;
+}
+
+// Retrieve all the categories from the JSON string
+function getBookCategories( jsonString ) {
+    // Get ALL the books...
+    var books = jsonString.bookstore.book;
+    var bookCategories = "";
+    // Iterate over all the books
+    for (bIDX = 0; bIDX < books.length; bIDX++) {
+        bookCategories = bookCategories + " '" + books[ bIDX ]._attributes.category + "'";
+    }
+    document.getElementById("bookCategories").innerHTML = bookCategories;
+}
+
+// Create 1 column table showing book titles using DOM methods
+function createTableWithDOM( jsonString ) {
+    // Create the TABLE tag
+    var table = document.createElement("table");
+    // Add a border attribute to the table
+    table.setAttribute("border", "2");
+    // Get ALL the books...
+    var books = jsonString.bookstore.book;
+    // Iterate over all the books
+    for (bIDX = 0; bIDX < books.length; bIDX++) {
+        // Create a row for the table
+        var aRow = document.createElement("tr");
+        // Create a table data element to hold the title
+        var aCell = document.createElement("td");
+        // Get a single book
+        var aBook = books[ bIDX ];
+        // Get its title element
+        var aTitle = aBook.title;
+        // Create a text node for the title
+        var textForTable = document.createTextNode(aTitle);
+        // Append the text node to the cell
+        aCell.appendChild(textForTable);
+        // Append the cell to the row
+        aRow.appendChild(aCell);
+        // Append the row to the table
+        table.appendChild(aRow);
+    }
+    // Append the table to the specified location
+    document.getElementById("tablegoeshere").appendChild(table);
+}
+
+// Create 1 column table showing book titles using HTML string
+function createTableNoDOM( jsonString ) {
+    // Create the TABLE tag
+    var table = '<table border="2">';
+    // Get ALL the books...
+    var books = jsonString.bookstore.book;
+    // Iterate over all the books
+    for (bIDX = 0; bIDX < books.length; bIDX++) {
+        // Create a row for the table
+        var aRow = "<tr>";
+        // Create a table data element to hold the title
+        var aCell = "<td>";
+        // Get a single book
+        var aBook = books[ bIDX ];
+        // Get its title element
+        var aTitle = aBook.title;
+        // Set title value to TD cell
+        aCell = aCell + aTitle + "</td>";
+        // Append the cell to the row
+        aRow = aRow + aCell + "</tr>";
+        // Append the row to the table
+        table = table + aRow;
+    }
+    // Close the table
+    table = table + "</table>";
+    // Update the specified location with the table
+    document.getElementById("tablegoeshere").innerHTML = table;
+}
+
+// Create 2 column table showing book titles and prices using HTML string
+function createBiggerTable( jsonString ) {
+    // Create the TABLE tag
+    var table = '<table border="2">';
+    // Get ALL the books...
+    var books = jsonString.bookstore.book;
+    // Iterate over all the books
+    for (bIDX = 0; bIDX < books.length; bIDX++) {
+        // Create a row for the table
+        var aRow = "<tr>";
+        // Create a table data element to hold the title
+        var aCell = "<td>";
+        // Get a single book
+        var aBook = books[ bIDX ];
+        // Get its title element
+        var aTitle = aBook.title;
+        // Set title value to TD cell
+        aCell = aCell + aTitle + "</td>";
+        // Append the cell to the row
+        aRow = aRow + aCell;
+
+        // Create a table data element to hold the price
+        aCell = "<td>";
+        // Get its price element
+        var aPrice = aBook.price;
+        // Set price value to TD cell
+        aCell = aCell + aPrice + "</td>";
+        // Append the cell to the row
+        aRow = aRow + aCell + "</tr>";
+        // Append the row to the table
+        table = table + aRow;
+    }
+    // Close the table
+    table = table + "</table>";
+    // Update the specified location with the table
+    document.getElementById("biggertablegoeshere").innerHTML = table;
+}
+
+// Retrieve the price of the Harry Potter book
+function getHPPrice( jsonString ) {
+    var hpPrice = "";
+    // Get all the book tags
+    var books = jsonString.bookstore.book;
+    // Look for the Harry Potter book and fetch its price
+    for (bIDX = 0; bIDX < books.length; bIDX++) {
+        if (jsonString.bookstore.book[ bIDX ].title == "Harry Potter") {
+            hpPrice = jsonString.bookstore.book[ bIDX ].price;
+            // We're outta here!
+            break;
+        }
+    }
+    // Update the specified location with the price
+    document.getElementById("hpPrice").innerHTML = hpPrice;
+}
+
+// Reset the page content
+function reset( ) {
+    document.getElementById("bookTitles").innerHTML = "&nbsp;";
+    document.getElementById("bookCategories").innerHTML = "&nbsp;";
+    document.getElementById("hpPrice").innerHTML = "&nbsp;";
+    document.getElementById("tablegoeshere").innerHTML = "&nbsp;";
+    document.getElementById("biggertablegoeshere").innerHTML = "&nbsp;";
+}
+</script>
+</head>
+<body>
+<h1>Doin' JSON Stuff</h1>
+<table>
+    <tr>
+        <td><button onclick="getBookTitles( jsonString )">Get Book Titles</button></td>
+        <td><div id="bookTitles">&nbsp;</div></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="getBookCategories( jsonString )">Get Book Categories</button></td>
+        <td><div id="bookCategories">&nbsp;</div></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="getHPPrice( jsonString )">Get The Price of Harry Potter Book</button></td>
+        <td><div id="hpPrice">&nbsp;</div></td>
+    </tr>
+    <tr>
+        <td><button onclick="createTableNoDOM( jsonString )">Create 1 column table showing book titles</button></td>
+        <td><div id="tablegoeshere">&nbsp;</div></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="createBiggerTable( jsonString )">Create 2 column table showing title, price</button></td>
+        <td><div id="biggertablegoeshere">&nbsp;</div></td>
+    </tr>
+
+</table>
+
+<button onclick="reset(  )">Reset Page</button>
+
+<pre>
+The JSON String for reference
+{
+ "bookstore":{
+              "book":[
+                      {"_attributes":{"category":"cooking"},
+                        "title":"Everyday Italian",
+                        "author":"Giada De Laurentiis",
+                        "year":"2005",
+                        "price":"30.00"},
+                       {"_attributes":{"category":"children"},
+                        "title":"Harry Potter",
+                        "author":"J K. Rowling",
+                        "year":"2005",
+                        "price":"29.99"}
+                       ]
+                 }
+}
+</pre> 
+
+</body>
+</html>

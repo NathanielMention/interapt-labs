@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Count Words in String</title>
+  <!-- here as an external script -->
+  <script src="countwords.js"></script>
+
+  <script type="text/javascript">
+    var wordCounts = {}; // Holds counts by word
+    var wordCountsByLetter = {}; // Holds counts of the first letter of words
+
+    function collectWordDistribution() {
+      function saveCounts(key, countObject) {
+        if (countObject[key] === undefined) {
+          countObject[key] = 0;
+        }
+        countObject[key]++;
+      }
+
+      var arrayOfWords = words.toLowerCase().split(' ');
+
+      for (var wIDX = 0; wIDX < arrayOfWords.length; wIDX++) {
+        saveCounts(arrayOfWords[wIDX], wordCounts);
+        saveCounts(arrayOfWords[wIDX][0], wordCountsByLetter);
+      }
+    }
+
+    function showWordDistribution() {
+      var headings = ["Count of Words", "Word", "Count"];
+      showData(headings, Object.keys(wordCounts), wordCounts);
+    }
+
+    function showFirstLetterDistribution() {
+      var headings = ["Count of Words by First Letter", "Letter", "Count"];
+      showData(headings, Object.keys(wordCountsByLetter), wordCountsByLetter);
+    }
+
+    function showSortWordDistribution() {
+      var headings = ["Count of Words sorted by word", "Word", "Count"];
+      var sortedByWord = Object.keys(wordCounts).sort();
+      showData(headings, sortedByWord, wordCounts);
+    }
+
+    function showSortLetterDistribution() {
+      var headings = ["Count of Words sorted by first letter", "Letter", "Count"];
+      var sortedByLetter = Object.keys(wordCountsByLetter).sort();
+      showData(headings, sortedByLetter, wordCountsByLetter);
+    }
+
+    function showSortCountDistribution() {
+      var headings = ["Count of Words sorted by Count", "Word", "Count"];
+      var keysByCount = Object.keys(wordCounts).sort(function (a, b) {
+        return wordCounts[b] - wordCounts[a];
+      });
+      showData(headings, keysByCount, wordCounts);
+    }
+
+    function showSortCountLetterDistribution() {
+      var headings = ["Count of First Letters sorted by Count", "Letter", "Count"];
+      var keysByCount = Object.keys(wordCountsByLetter).sort(function (a, b) {
+        return wordCountsByLetter[b] - wordCountsByLetter[a];
+      });
+      showData(headings, keysByCount, wordCountsByLetter);
+    }
+  </script>
+</head>
+<body onload="collectWordDistribution();">
+  <table>
+    <tr>
+      <td><input type="button" onclick='showWordDistribution()' value="Click to list word distribution" /></td>
+      <td><input type="button" onclick='showFirstLetterDistribution()' value="Click to list first letter distribution" /></td>
+    </tr>
+    <tr>
+      <td><input type="button" onclick='showSortWordDistribution()' value="Click to list sorted word distribution" /></td>
+      <td><input type="button" onclick='showSortLetterDistribution()' value="Click to list sorted first letter distribution" /></td>
+    </tr>
+    <tr>
+      <td><input type="button" onclick='showSortCountDistribution()' value="Click to list sorted count distribution" /></td>
+      <td><input type="button" onclick='showSortCountLetterDistribution()' value="Click to list sorted count first letter distribution" /></td>
+    </tr>
+  </table>
+  <!-- Here's where the table will go -->
+  <div id="words"></div>
+</body>
+</html>

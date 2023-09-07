@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rock, Paper, Scissors</title>
+
+  <!-- Include the external file miscfuncs.js that has routines used here -->
+  <script src="miscfuncs.js"></script>
+<script>
+'use strict';
+var rockImage     = "rock.jpg" ;
+var paperImage    = "paper.jpg" ;
+var scissorsImage = "scissors.jpg" ;
+
+var	yourLoot     = 100  ;
+var computerLoot = 100 ;
+
+// Return the image corresponding to the random pick
+// 0 ==> rock, 1 ==> paper, 2 ==> scissors
+function getComputerPick( ) {
+	var pickNum = Math.floor( Math.random( ) * 10000 ) % 3  ;
+	
+	// Use pickNum to return the corresponding image (rock, paper, or scissors)
+	if (pickNum === 0) {
+		return rockImage;
+	} else if (pickNum === 1) {
+		return paperImage;
+	} else {
+		return scissorsImage;
+	}
+}
+
+// Code a function that returns true when the selection made by 
+// YOU with image yourPick LOSES to the selection made by
+// the computer.
+function youLost( yourPick, computerPick ) {
+	// Determine the winner based on the picks.
+	// If yourPick loses to computerPick, return true; otherwise, return false.
+	// You can compare the picks to decide who wins.
+	// Implement the logic here.
+}
+
+// Code a function that:
+// 1 - returns the status of the round. Either the string "Tie", "You Win" or "You Lose"
+// 2 - Adjusts the loot. If a tie, no adjustment. The winner gets 5 extra $; the loser loses 5$
+// 
+// If the picks are the same, it's a tie.
+// else use the youLost function you coded to see if you lost
+// If there is no tie and you did not lose, the computer lost
+function adjustMoniesGetStatus( myPick, computerPick ) {
+	// Compare the picks to determine the result of the round (Tie, You Win, or You Lose).
+	var status;
+	if (myPick === computerPick) {
+		status = "Tie";
+	} else if (youLost(myPick, computerPick)) {
+		status = "You Lose";
+		yourLoot -= 5; // You lost, so deduct 5$ from your loot.
+		computerLoot += 5; // Computer won, so add 5$ to computer's loot.
+	} else {
+		status = "You Win";
+		yourLoot += 5; // You won, so add 5$ to your loot.
+		computerLoot -= 5; // Computer lost, so deduct 5$ from computer's loot.
+	}
+
+	// Return the status of the round.
+	return status;
+} 
+
+// This function is called when you select an image (look at HTML below)
+function play( yourPickImage ) {
+	// Display your pick - this is a gimme using the function in miscfuncs.js
+	showPicks( 'You', yourPickImage ) ;
+	// Retrieve the image corresponding to the computer pick.
+	// Use the function you coded for this purpose
+	var computerPickImage = getComputerPick();
+	// Display the computer's pick again using the provided function in miscfuncs.js
+	showPicks( 'Computer', computerPickImage ) ;
+	// Use the function you coded above to retrieve who won or lost the round and to
+	// adjust your and computer's monies
+	var status = adjustMoniesGetStatus( yourPickImage, computerPickImage );
+	// Change data in table to show who won and current $$$ using function
+	// in miscfuncs.js
+	showStatusAndMonies( status, yourLoot, computerLoot ) ;	
+}
+</script>
+
+</head>
+
+<body>
+	<h1>Rock, Paper, Scissors</h1>
+	<p>
+	<h3>Make a selection.. 5$ a bet against the computer</h3>
+	
+	 <input type="image"  onclick='play( rockImage );' src="rock.jpg" >
+	 <input type="image"  onclick='play( paperImage );' src="paper.jpg" >
+	 <input type="image"  onclick='play( scissorsImage );' src="scissors.jpg" >
+	 <p>
+	 <table>
+		<tr><td><div id="You"></div></td><td><div id='Computer'></div></td></tr>
+		<tr><td colspan="2"><div id="status"></div></td></tr>
+		<tr><td><div id="yourMoney"></div></td><td><div id="computerMoney"></div></td></tr>
+	 </table>
+
+</body>
+</html>

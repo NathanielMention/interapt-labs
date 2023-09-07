@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subsets of a string</title>
+  <script type="text/javascript">
+    function showSubsets(myString) {
+      var subset = "";
+      // Outer loop iterates over the starting character of the substring
+      for (var i = 0; i < myString.length; i++) {      
+        // Inner loop builds the substring from the character at the
+        // outer loop index to the end of the string
+        for (var j = i + 1; j <= myString.length; j++) {         
+          // Extract the substring from i to j and append it to 'subset'
+          subset += myString.substring(i, j);
+          // Add a newline character if this is not the last substring
+          if (j < myString.length) {
+            subset += '\n';
+          }
+        }
+      }
+
+      return subset;
+    }
+
+    var stringForSubStrLab = prompt("Enter a string here");
+    console.log(showSubsets(stringForSubStrLab));
+  </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<body>
+<script>
+// This is how you generate a random number in JavaScript
+var randNum = Math.floor(Math.random() * 50) + 1;
+
+var turns = 5; // how many guesses you want to try
+
+var hint = 'Guess my number, 1-50!';
+
+// Code a loop that allows you to guess the coded number of tries
+while (turns > 0) {
+  // INSIDE THE LOOP:
+
+  //  1   Code an expression that PROMPTS the user for a guess
+  //      Assign the user input to a variable named guess
+  //      Put in the HINT coded above and the remaining number of guesses
+  var guess = prompt(hint + '\nGuesses remaining: ' + turns);
+
+  //   2  If user DOES NOT enter a number then BREAK from the loop
+  //      If user CANCELs from PROMPT, BREAK from the loop
+  if (guess === null || isNaN(guess)) {
+    break;
+  }
+
+  // Convert guess to a number
+  guess = parseInt(guess);
+
+  //   3  IF the guess EQUALS the number, write to the screen "YOU WIN!" and reset the turns counter to 0
+  if (guess === randNum) {
+    document.write('<p>YOU WIN!</p>');
+    turns = 0;
+  }
+  //   4  If the guess DOES NOT EQUAL the number, change the HINT variable to say "Nope. Too Small" or 
+  //      "Nope. Too Big" based on the relationship between the guess and the number
+  //      Also DECREMENT the turns variable
+  else if (guess < randNum) {
+    hint = 'Nope. Too Small';
+    turns--;
+  } else {
+    hint = 'Nope. Too Big';
+    turns--;
+  }
+}
+
+// OUTSIDE the loop, list the SECRET NUMBER in an ALERT box
+alert('The secret number was: ' + randNum);
+</script>
+</body>
+</html>

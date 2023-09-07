@@ -1,0 +1,40 @@
+<html>
+<body>
+	<script>
+	// Code a prompt to fetch a candidate number. Assign to variable named candidate	
+	var candidate = prompt("Enter a number to check if its prime:");
+	
+	// Code a loop that will execute when you enter a number > 2
+	while (candidate > 2) {
+		// Test candidate by dividing by all numbers < its square root
+		// If no number evenly divides, the number is prime
+		var sqRoot =  Math.floor( Math.sqrt( candidate ) ) ;
+		
+		// Code an iterative loop that tests if every number from 2 on
+		// evenly divides the candidate
+		// If it does, display an ALERT stating the input number is not
+		// prime and show the two factors found
+		// After you determine the candidate IS NOT prime, BREAK from the loop
+		for (var i = 2; i <= sqRoot; i++) {
+			if (candidate % i === 0) {
+				alert("The number is not prime. It is divisible by " + i + " and " + candidate/i);
+				break;
+			}
+		}
+
+		// We know the number is prime if no number in the above loop
+		// evenly divided the candidate number
+		// Test if the index (what you divided by) equals the upper bound of the loop
+		// If it does, the loop exhausted all numbers, and the number you entered
+		// IS PRIME
+		// So, display an ALERT saying the candidate is prime!
+		if (i > sqRoot) {
+			alert("The number is prime!");
+		}
+		
+		// Get another number for prime testing here...
+		candidate = prompt("Enter another candidate number to check for primality (or enter a number <= 2 to exit):");
+	} 
+	</script>
+</body>
+</html>
